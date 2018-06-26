@@ -2,6 +2,8 @@
 
 In order to run this test, first install docker, then run the following commands:
 
-```cd docker
+```
+cd docker
 sudo ./build.sh
-sudo ./run.sh```
+sudo ./run.sh
+```
