@@ -1,0 +1,40 @@
+Gherkin: why are these tests helpful?
+  Scenario: Input file does not exist
+    Null inputs are a common failure condition.
+  Scenario: Input file is empty
+    Null inputs are a common failure condition.
+  Scenario: Input file contains non-ascii characters
+    Sorting on [a-zA-Z] is usually well defined, but anything outside of that, and especially non-ascii characters, are a tossup.
+  Scenario: Input file is not utf-8 encoded, but encoding is specified
+    Sometimes non-utf8 files manage to get into system that doesn't expect them, but if the actual encoding is known this is still recoverable.
+  Scenario: Input file is not utf-8 encoded, and encoding is not specified
+    If a file with an unknown non-utf8 encoding makes it into a system, ideally it isn't coincidentally utf8-interpretable. Otherwise there's no way to be certain that you're getting garbage data. It's a good idea to be aware of how the system behaves when you encounter this situation.
+
+
+Tools: Why would a developer use version control?
+  The only downside of version control that I can think of off the cuff is that they can cause endless headaches for people that aren't experienced with them. I've seen more than one newbie lose changes or get into a near-unrecoverable state with git. As for how they help: ability to revert features easily; connect bugs to a revision number; mix and match changes for different releases; easily merge changes from multiple developers; git blame.
+
+
+Tools: Why use Docker?
+  Downsides: some people will be resistant at first since vms already solve most of the problems docker solves; docker disables some features of the virtual os due to security issues, which can interfere with debugging.
+  Upsides: dockerized code (ideally) works the same way on everyone's machine, regardless of other things running there; docker allows multiple apps to run on the same machine, even if the apps would normally conflict with one another via the changes they make to their environment; docker containers put less load on a system than a vm.
+
+
+Tools: How do you choose which language to use for a given task?
+  I use what's used at the company I'm at, unless we have to add something new to our stack, or it's green-field and it seems appropriate to add something new to our stack (e.g. we're adding a web UI and everyone did Java until now). For this project, the requested language for the string sorting script was Python. No more code needed to be written, so Python was the only general purpose language used (unless you count bash).
+
+
+Testing: What's the right role for QA?
+  Developers make sure their code works; QA makes sure the product works. That is to say, QA should be focusing on doing the things a user will do, in order to catch the issues that aren't caught looking at minutia.
+
+
+Testing: What do I do with a 2 week lead on dev?
+  Getting some machines and setting up a UAT environment would fill a couple hours/days. A following chunk could be spent familiarizing myself with some of the technology that will be used for the project. As fo the rest of my time, the teams I've worked on in the past are typically small enough that they can use an extra hand planning out architecture or features.
+
+
+Testing: When auto vs manual?
+  Manual testing is useful before, during, and after automated testing to get a good idea of where automatic testing focus should be, and where your existing automated tests have holes. Often it's useful to record your manual tests and later turn those into automated tests.
+
+
+Testing: New features and refactoring. Where to focus?
+  First up run the old integration tests to find any issues you can with the refactors, as 1) old code often has a lot of things relying on it, and 2) old code breaking will cause more negative customer feedback than new code breaking. It's likely helpful to focus new tests on whatever has the most changes in version control for the past sprint. If a particular feature is unlikely to see heavy use, you can get away with sacrificing test time on that feature for more test time on other features.
