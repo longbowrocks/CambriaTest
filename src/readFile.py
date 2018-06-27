@@ -3,8 +3,8 @@
 def readFile(inFilename, outFilename):
     with open(inFilename) as inFile:
         line = inFile.readline()
-        strings = line[:-1].lower().split(',')
-        strings.sort()
+        strings = line[:-1].split(',')
+        strings.sort(key=lambda x: x.lower())
         with open(outFilename, 'w') as outFile:
             outFile.write(','.join(strings))
 
